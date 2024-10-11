@@ -1,0 +1,119 @@
+/* MenuHeader.css */
+.navbar-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 1000;
+}
+
+.home-button {
+  background-color: #3498db;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.home-button:hover {
+  background-color: #2980b9;
+}
+
+/* Thanh tìm kiếm */
+.search-bar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1; /* Giúp ô input chiếm toàn bộ chiều rộng có sẵn */
+  padding: 5px 40px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.search-bar:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.search-bar-icon {
+  position: absolute;
+  left: 15px;
+  color: #aaa;
+}
+
+/* Phần category */
+.category-buttons-container {
+  margin-top: 8px; /* Giảm khoảng cách phía trên */
+  display: flex; /* Sử dụng Flexbox để sắp xếp các nút */
+  overflow-x: auto; /* Cho phép cuộn theo chiều ngang */
+  overflow-y: hidden; /* Ngăn cuộn theo chiều dọc */
+  padding: 10px 0;
+  max-height: 80px; /* Chiều cao tối đa cho phần chứa danh mục */
+  white-space: nowrap; /* Ngăn ngừa văn bản xuống dòng */
+  scrollbar-width: thin; /* Cho phép thanh cuộn mỏng (chỉ cho Firefox) */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Ẩn thanh cuộn theo mặc định trên IE và Edge */
+}
+
+.category-buttons-container::-webkit-scrollbar {
+  height: 8px; /* Chiều cao thanh cuộn */
+}
+
+.category-buttons-container::-webkit-scrollbar-thumb {
+  background-color: #3498db; /* Màu sắc thanh cuộn */
+  border-radius: 10px; /* Độ cong của thanh cuộn */
+}
+
+/* Cải tiến cho các nút danh mục */
+.category-button {
+  padding: 8px 12px;
+  margin: 4px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Thêm hiệu ứng transform */
+  font-size: 14px; /* Đảm bảo font-size của các nút giống nhau */
+  flex-shrink: 0; /* Đảm bảo nút không bị co lại */
+  min-width: 100px; /* Chiều rộng tối thiểu cho mỗi nút */
+  text-overflow: ellipsis; /* Hiển thị dấu ... khi văn bản dài */
+  overflow: hidden; /* Ẩn phần văn bản bị tràn */
+  white-space: nowrap; /* Ngăn ngừa văn bản xuống dòng */
+  display: inline-block; /* Đảm bảo nút có kích thước bằng nhau */
+}
+
+.category-button.active {
+  background-color: #3498db; /* Màu nền cho nút đang hoạt động */
+  color: white;
+}
+
+.category-button:hover {
+  background-color: #bbb;
+  transform: scale(1.05); /* Tăng kích thước nút khi hover */
+}
+
+/* Đảm bảo nội dung trang không bị navbar che mất */
+.content {
+  padding-top: 80px; /* Khoảng cách đủ để không bị che */
+}
+
+.search-result {
+  font-size: 14px; /* Kích thước chữ */
+  color: #555; /* Màu chữ */
+  margin-top: 8px; /* Khoảng cách trên */
+}
+
+/* Thêm quy tắc cho phần danh sách món ăn để tránh bị che */
+.food-list-container {
+  margin-top: 80px; /* Đảm bảo có khoảng cách với MenuHeader */
+}

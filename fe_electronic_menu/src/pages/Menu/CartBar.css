@@ -1,0 +1,33 @@
+/* CartBar.css */
+.cart-bar {
+    position: fixed; /* Giữ cố định thanh giỏ hàng */
+    bottom: 0;       /* Đặt ở dưới cùng */
+    left: 0;
+    right: 0;
+    background-color: orange;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Giữ thanh ở phía trên các thành phần khác */
+}
+
+.cart-bar-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 24px;
+}
+
+.cart-details {
+    font-size: 18px;
+}
+
+.cart-arrow {
+    font-size: 24px;
+}

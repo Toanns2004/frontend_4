@@ -1,0 +1,67 @@
+.content {
+  padding-top: 20vh; /* Điều chỉnh chiều cao theo % của chiều cao viewport */
+  text-align: center; /* Căn giữa nội dung trong .content */
+}
+
+.dishes-list {
+  display: flex; /* Sử dụng Flexbox để xếp các món ăn */
+  flex-wrap: wrap; /* Cho phép các món ăn xuống dòng nếu không đủ không gian */
+  justify-content: center; /* Căn giữa các món ăn */
+  margin-top: 22vh; /* Khoảng cách trên cho danh sách món ăn theo % của chiều cao viewport */
+}
+
+/* Thiết lập kiểu hiển thị cho món ăn */
+.dish-item {
+  flex: 0 1 calc(50% - 5%); /* Chiếm 50% chiều rộng để hiển thị 2 món ăn trên điện thoại */
+  margin: 2.5%; /* Thêm khoảng cách giữa các món ăn */
+  padding: 10px; /* Thêm padding cho mỗi món ăn */
+  border: 1px solid #ddd; /* Đường viền cho món ăn */
+  border-radius: 10px; /* Bo tròn các góc */
+  background-color: #fff; /* Màu nền cho món ăn */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng đổ cho món ăn */
+  transition: transform 0.3s; /* Thêm hiệu ứng cho món ăn khi hover */
+}
+
+/* Hiệu ứng khi hover cho món ăn */
+.dish-item:hover {
+  transform: scale(1.05); /* Phóng to món ăn khi hover */
+}
+
+/* Media query cho màn hình nhỏ hơn 768px */
+@media (max-width: 768px) {
+  .content {
+    padding-top: 15vh; /* Giảm padding-top cho màn hình nhỏ */
+  }
+
+  .dishes-list {
+    margin-top: 5vh; /* Giảm margin-top cho danh sách món ăn trên màn hình nhỏ */
+  }
+
+  .dish-item {
+    flex: 0 1 calc(50% - 5%); /* Hiển thị 2 món ăn trên màn hình nhỏ */
+    margin: 2.5%; /* Đảm bảo margin không quá lớn */
+  }
+}
+
+/* Media query cho màn hình nhỏ hơn 576px */
+@media (max-width: 576px) {
+  .content {
+    padding-top: 10vh; /* Giảm hơn nữa cho màn hình rất nhỏ */
+  }
+
+  .dishes-list {
+    margin-top: 3vh; /* Giảm hơn nữa cho màn hình rất nhỏ */
+  }
+
+  .dish-item {
+    flex: 0 1 100%; /* Mỗi món ăn chiếm toàn bộ chiều rộng trên màn hình rất nhỏ */
+    margin: 5% 0; /* Thêm khoảng cách dọc cho mỗi món ăn */
+  }
+}
+
+/* Media query cho màn hình lớn hơn 768px (máy tính) */
+@media (min-width: 769px) {
+  .dish-item {
+    flex: 0 1 calc(22% - 5%); /* Hiển thị 4 món ăn trên máy tính */
+  }
+}
