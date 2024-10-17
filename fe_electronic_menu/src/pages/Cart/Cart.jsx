@@ -40,7 +40,7 @@ const Cart = () => {
                     
                 })),
                 createAt: new Date().toISOString(),
-                status: "Pending",
+                status: "Paid",
                 payment: localStorage.getItem('paymentMethod')
             };
             console.log(tableId)
