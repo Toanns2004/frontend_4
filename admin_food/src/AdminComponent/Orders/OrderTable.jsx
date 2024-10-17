@@ -18,11 +18,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const OrderTable = ({ url = `http://localhost:8080` }) => {
-  const [orderItems, setOrderItems] = useState([]); // Quản lý danh sách đơn hàng
-  const [selectedOrder, setSelectedOrder] = useState(null); // Đơn hàng đã chọn để cập nhật
-  const [openModal, setOpenModal] = useState(false); // Điều khiển modal
+  const [orderItems, setOrderItems] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
-  // Hàm lấy danh sách tất cả đơn hàng từ API
+
   const fetchAllOrders = async () => {
     try {
       const response = await axios.get(`${url}/api/v1/orders`);
@@ -40,7 +40,7 @@ const OrderTable = ({ url = `http://localhost:8080` }) => {
   // Hàm lấy chi tiết đơn hàng theo ID
   const fetchOrderById = async (orderId) => {
     try {
-      const response = await axios.get(`${url}/api/v1/order_item/${orderId}`);
+      const response = await axios.get(`${url}/api/v1/orders/${orderId}`);
       if (response.status === 200) {
         setSelectedOrder(response.data); // Lưu thông tin đơn hàng chi tiết
         setOpenModal(true); // Mở modal
@@ -92,7 +92,9 @@ const OrderTable = ({ url = `http://localhost:8080` }) => {
                     orderItems.map((order, index) => (
                         <TableRow key={index} style={{ cursor: "pointer" }}>
                           <TableCell onClick={() => handleOpenModal(order.id)}>{order.billNumber}</TableCell>
-                          <TableCell align="left" onClick={() => handleOpenModal(order.id)}>{order.restaurantTable.nameTable}</TableCell>
+                          <TableCell align="left" onClick={() => handleOpenModal(order.id)}>
+                            {order.restaurantTable ? order.restaurantTable.nameTable : "N/A"}
+                          </TableCell>
                           <TableCell align="left" onClick={() => handleOpenModal(order.id)}>{order.customer}</TableCell>
                           <TableCell align="left" onClick={() => handleOpenModal(order.id)}>${order.totalPrice}</TableCell>
                           <TableCell align="left" onClick={() => handleOpenModal(order.id)}>{new Date(order.createAt).toLocaleString()}</TableCell>
@@ -149,27 +151,27 @@ const OrderTable = ({ url = `http://localhost:8080` }) => {
                   }}
               >
                 <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ fontWeight: 'bold', mb: 2 }}>
-                  {selectedOrder[0]?.order.billNumber}
+                  Order: {selectedOrder.billNumber}
                 </Typography>
 
                 <Box sx={{ mb: 2 }}>
-                  <Typography><strong>Customer:</strong> {selectedOrder[0]?.order.customer}</Typography>
-                  <Typography><strong>Table:</strong> {selectedOrder[0]?.order.restaurantTable.nameTable}</Typography>
-                  {/* Kiểm tra sự tồn tại của coupon */}
-                  <Typography>
-                    <strong>Coupon:</strong> {selectedOrder[0]?.order.coupon ? selectedOrder[0]?.order.coupon.name : ""}
-                  </Typography>
-                  <Typography><strong>Payment:</strong> {selectedOrder[0]?.order.payment}</Typography>
-                  <Typography><strong>OriginalPrice:</strong> {selectedOrder[0]?.order.originalPrice}</Typography>
-                  <Typography><strong>TotalDiscount:</strong> {selectedOrder[0]?.order.totalDiscount}</Typography>
-                  <Typography><strong>Total Price:</strong> ${selectedOrder[0]?.order.totalPrice}</Typography>
+                  <Typography><strong>Customer:</strong> {selectedOrder.nameCustomer}</Typography>
+                  {selectedOrder.table ? (
+                      <Typography><strong>Table:</strong> {selectedOrder.table.nameTable}</Typography>
+                  ) : (
+                      <Typography><strong>Table:</strong> Not Assigned</Typography>
+                  )}
+                  <Typography><strong>Type:</strong> {selectedOrder.type}</Typography>
+                  <Typography><strong>Original Price:</strong> ${selectedOrder.originalPrice}</Typography>
+                  <Typography><strong>Total Discount:</strong> ${selectedOrder.totalDiscount}</Typography>
+                  <Typography><strong>Total Price:</strong> ${selectedOrder.totalPrice}</Typography>
                 </Box>
 
                 <Typography sx={{ mt: 2, mb: 2, fontWeight: 'bold' }} variant="subtitle1">
                   Ordered Dishes:
                 </Typography>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  {selectedOrder.map((item, index) => (
+                  {selectedOrder.items.map((item, index) => (
                       <Box
                           key={index}
                           sx={{
@@ -205,8 +207,6 @@ const OrderTable = ({ url = `http://localhost:8080` }) => {
                       </Box>
                   ))}
                 </Box>
-
-
               </Box>
             </Modal>
         )}

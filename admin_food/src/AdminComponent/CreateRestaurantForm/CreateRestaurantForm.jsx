@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { CircularProgress, Grid, IconButton, TextField,Button  } from '@mui/material';
 import { AddPhotoAlternate } from '@mui/icons-material';
 import CloseIcon from '@mui/icons-material/Close';
-import { uploadImageToCloudinary } from '../util/UploadToCloudinary';
+import { uploadImageToCloudinary } from '../util/UploadToCloudinary.js';
 
 const initialValues={
   name:"",

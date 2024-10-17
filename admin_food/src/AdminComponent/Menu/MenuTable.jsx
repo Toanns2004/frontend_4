@@ -66,11 +66,15 @@ const MenuTable = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = menuList.slice(indexOfFirstItem, indexOfLastItem);
-
+  const token = localStorage.getItem("token");
   // Remove a menu item
   const removeFood = async (foodId) => {
     try {
-      const response = await axios.delete(`${url}/api/v1/dishes/${foodId}`);
+      const response = await axios.delete(`http://localhost:8080/api/v1/dishes/${foodId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Đảm bảo bạn gửi token
+        }
+      });
       if (response.data && response.data.message) {
         toast.success(response.data.message);
         fetchMenuList(); // Refresh the menu list after deletion
